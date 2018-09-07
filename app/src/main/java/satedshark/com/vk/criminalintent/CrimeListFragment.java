@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
 
@@ -22,5 +24,34 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
 
+    }
+
+    private class CrimeHolder extends RecyclerView.ViewHolder{
+        public CrimeHolder(LayoutInflater inflater, ViewGroup parent){
+            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+        }
+    }
+    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>{
+        private List<Crime> mCrimes;
+        public CrimeAdapter(List<Crime> crimes){
+            mCrimes = crimes;
+        }
+
+        @NonNull
+        @Override
+        public CrimeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            return new CrimeHolder(inflater,viewGroup );
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CrimeHolder crimeHolder, int i) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mCrimes.size();
+        }
     }
 }
