@@ -36,11 +36,6 @@ public class CrimeLab {
     }
 
     public void delCrime(Crime c){
-        for(int i = 0; i < mCrimes.size(); i++){
-            if(mCrimes.get(i).getId() == c.getId()){
-                mCrimes.remove(i);
-                return;
-            }
-        }
+        mCrimes.remove(c);
     }
 }
