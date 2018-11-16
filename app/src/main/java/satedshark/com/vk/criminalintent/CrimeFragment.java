@@ -112,4 +112,15 @@ public class CrimeFragment extends Fragment{
     private void updateDate() {
         mDateButton.setText(mCrime.getDate().toString());
     }
+
+    /**
+     * Called when the Fragment is no longer resumed.  This is generally
+     * tied to {@link Activity#onPause() Activity.onPause} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
 }
