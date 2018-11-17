@@ -69,6 +69,7 @@ public class CrimePagerActivity extends AppCompatActivity implements View.OnClic
                 else mLastButton.setClickable(true);
                 crime = mCrimes.get(mViewPager.getCurrentItem());
             }
+
         });
         UUID crimeId = (UUID)getIntent().getSerializableExtra(EXTRA_CRIME_ID);
         for(int i = 0; i < mCrimes.size(); i++){

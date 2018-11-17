@@ -40,7 +40,6 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
         return view;
-
     }
 
 
@@ -58,6 +57,7 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setmCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -67,7 +67,7 @@ public class CrimeListFragment extends Fragment {
     private void updateSubtitle(){
           CrimeLab crimeLab = CrimeLab.get(getActivity());
           int crimeCount = crimeLab.getCrimes().size();
-          String subtitle = getString(R.string.subtitle_format, crimeCount);
+          String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeCount, crimeCount);
 
         if(!mSubtitleVisible){
             subtitle = null;
@@ -79,7 +79,7 @@ public class CrimeListFragment extends Fragment {
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView mTitelTextView;
+        private TextView mTitleTextView;
         private TextView mDataTextView;
         private ImageView mSolvedImageView;
         Crime mCrime;
@@ -87,13 +87,13 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
             itemView.setOnClickListener(this);
-            mTitelTextView = itemView.findViewById(R.id.crime_title);
+            mTitleTextView = itemView.findViewById(R.id.crime_title);
             mDataTextView = itemView.findViewById(R.id.crime_date);
             mSolvedImageView = itemView.findViewById(R.id.crime_solved);
         }
         public void bind(Crime crime){
             mCrime = crime;
-            mTitelTextView.setText(crime.getTitle());
+            mTitleTextView.setText(crime.getTitle());
             mDataTextView.setText(DateFormat.format("EEEE, MMM d, yyyy",crime.getDate()));
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE:View.INVISIBLE);
         }
@@ -104,6 +104,7 @@ public class CrimeListFragment extends Fragment {
             startActivity(intent);
         }
     }
+
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>{
         private List<Crime> mCrimes;
         public CrimeAdapter(List<Crime> crimes){
@@ -126,6 +127,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setmCrimes(List<Crime> mCrimes) {
+            this.mCrimes = mCrimes;
         }
     }
 

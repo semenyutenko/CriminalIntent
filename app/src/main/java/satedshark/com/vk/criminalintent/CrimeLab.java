@@ -85,7 +85,8 @@ public class CrimeLab {
     }
 
     public void delCrime(Crime c) {
-
+        String uuidString = c.getId().toString();
+        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " =?", new String[]{uuidString});
     }
 
     private CrimeCursorWraper queryCrimes(String whereClause, String[] whereArgs){
