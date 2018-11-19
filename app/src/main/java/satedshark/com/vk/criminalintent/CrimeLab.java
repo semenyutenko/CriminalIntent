@@ -11,7 +11,6 @@ import java.util.UUID;
 
 import satedshark.com.vk.criminalintent.database.CrimeBaseHelper;
 import satedshark.com.vk.criminalintent.database.CrimeCursorWraper;
-import satedshark.com.vk.criminalintent.database.CrimeDbSchema;
 import satedshark.com.vk.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 public class CrimeLab {
@@ -26,6 +25,7 @@ public class CrimeLab {
         values.put(CrimeTable.Cols.TITLE, crime.getTitle());
         values.put(CrimeTable.Cols.DATE, crime.getDate().getTime());
         values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
         return values;
     }
 

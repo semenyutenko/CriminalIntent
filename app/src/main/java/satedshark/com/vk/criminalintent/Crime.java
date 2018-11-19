@@ -10,6 +10,7 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private String mSuspect;
     //endregion
 
     public Crime(){
@@ -46,5 +47,13 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
+    }
+
+    public String getSuspect(){
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        this.mSuspect = suspect;
     }
 }
